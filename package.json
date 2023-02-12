@@ -17,6 +17,7 @@
     "react-router-dom": "^6.8.1",
     "react-scripts": "5.0.1",
     "redux-logger": "^3.0.6",
+    "redux-mock-store": "^1.5.4",
     "redux-saga": "^1.2.2",
     "styled-components": "^5.3.6",
     "web-vitals": "^2.1.4"
@@ -24,7 +25,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --coverage",
+    "test": "react-scripts test --coverage --watchAll=false",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {

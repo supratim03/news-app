@@ -8,6 +8,7 @@ import { Container, GridBlock, ContainerHeaderBlock, SelectBlock, CardBlock, Gri
 import '../../styles/HomeContainer.css';
 import { useNavigate } from "react-router-dom";
 import LoaderComponent from "../../components/LoaderComponent/LoaderComponent";
+import { sortDropdownValues } from "../../constants/constant";
 
 const HomeContainer = () => {
     const dispatch = useDispatch();
@@ -19,7 +20,7 @@ const HomeContainer = () => {
     useEffect(() => {
         dispatch(getDefaultNews(10, 'newest'))
     }, [])
-    
+
     const handleArticleById = (id, url) => {
         sessionStorage.setItem('apiUrl', url);
         let value = id.replaceAll('/', '-')
@@ -66,6 +67,9 @@ const HomeContainer = () => {
         setShowSearch(value)
     }
 
+    const handleFilterRecords = value => {
+        dispatch(getDefaultNews(10, value))
+    }
     return (
         <>
             <HeaderComponent showSearch={showSearch} onFocus={handleOnFocus} />
@@ -75,7 +79,7 @@ const HomeContainer = () => {
                         {'Top Stories'}
                     </ContainerHeaderBlock>
                     <SelectBlock>
-                        <SelectComponent />
+                        <SelectComponent optionsList={sortDropdownValues} handleFilterRecords={handleFilterRecords}/>
                     </SelectBlock>
                 </GridBlock>
             </Container>

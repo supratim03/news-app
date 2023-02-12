@@ -8,6 +8,7 @@ import { getSearchResults, setIsLoading } from "../../store/actions/actions";
 import { Card, CardBlock, Container, ContainerHeaderBlock, GridBlock, GridContainer, SelectBlock } from "./SearchContainerStyled";
 import '../../styles/HomeContainer.css'
 import FooterComponent from "../../components/FooterComponent/FooterComponent";
+import { sortDropdownValues } from "../../constants/constant";
 
 const SearchContainer = () => {
     const { searchVal } = useParams();
@@ -49,6 +50,10 @@ const SearchContainer = () => {
         )
     })
 
+    const handleFilterRecords = value => {
+        dispatch(getSearchResults(searchVal, 10, value))
+    }
+
     return (
         <>
             <HeaderComponent />
@@ -58,7 +63,7 @@ const SearchContainer = () => {
                         Search Results
                     </ContainerHeaderBlock>
                     <SelectBlock>
-                        <SelectComponent />
+                        <SelectComponent optionsList={sortDropdownValues} handleFilterRecords={handleFilterRecords}/>
                     </SelectBlock>
                 </GridBlock>
             </Container>

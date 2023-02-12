@@ -13,6 +13,7 @@ const ViewArticle = () => {
     const isLoading = useSelector(state => state.news.isLoading)
     const articleDetail = useSelector(state => state.news.articleById);
 
+
     useEffect(() => {
         dispatch(setIsLoading(true))
         dispatch(getArticleById(sessionStorage.getItem('apiUrl')));

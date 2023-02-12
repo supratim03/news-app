@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Home container render correctly 1`] = `ReactWrapper {}`;
+
+exports[`Home container with laoder render correctly 1`] = `ReactWrapper {}`;

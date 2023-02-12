@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Search container render correctly 1`] = `ReactWrapper {}`;
+
+exports[`view article container render correctly 1`] = `ReactWrapper {}`;
+
+exports[`view article container render correctly 2`] = `ReactWrapper {}`;

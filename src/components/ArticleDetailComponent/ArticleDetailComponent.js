@@ -4,7 +4,6 @@ import { ArticleBlock, ArticleBody, ArticleContainer, BodyBlock, Headline, Headl
 const ArticleDetailComponent = ({ articleDetail }) => {
 
     const getTextBodies = articleDetail?.blocks && articleDetail?.blocks?.body.map((text, index) => {
-        console.log(text)
         return (
             <div key={text.id}>
                 <p>{text.bodyTextSummary}</p>
