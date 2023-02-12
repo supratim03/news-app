@@ -1,6 +1,10 @@
 import React from "react";
-import PropTypes from 'prop-types'
-import { ArticleBlock, ArticleBody, ArticleContainer, BodyBlock, Headline, HeadlineBlock, PublicationDateBlock, TextBlock, Thumbnail, Title } from "./ArticleDetailStyled";
+import PropTypes from 'prop-types';
+import moment from 'moment';
+import { ArticleBlock, ArticleBody, ArticleContainer, BodyBlock, Headline,
+    HeadlineBlock, PublicationDateBlock, TextBlock,
+    Thumbnail, Title 
+} from "./ArticleDetailStyled";
 const ArticleDetailComponent = ({ articleDetail }) => {
 
     const getTextBodies = articleDetail?.blocks && articleDetail?.blocks?.body.map((text, index) => {
@@ -11,10 +15,11 @@ const ArticleDetailComponent = ({ articleDetail }) => {
 
         )
     })
+
     return (
         <ArticleContainer>
             <PublicationDateBlock>
-                <span>{articleDetail?.webPublicationDate}</span>
+                <span>{moment(articleDetail?.webPublicationDate).format('YYYY-MM-DD hh:mm A')}</span>
             </PublicationDateBlock>
             <ArticleBlock>
                 <Title>

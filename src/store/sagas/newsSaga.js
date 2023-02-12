@@ -3,9 +3,9 @@ import * as newsActions from "../actions/actions";
 import { takeEvery, put, call, all} from "redux-saga/effects";
 import * as api from "../../api/apiHelper";
 
-export function* getDefaultNews({ pageSize, sortValue, searchVal}) {
+export function* getDefaultNews({ pageSize, sortValue }) {
     const api_key = 'd26053c3-44aa-4498-a609-49701712ed54'
-	const url = `https://content.guardianapis.com/search?q=${searchVal}&api-key=${api_key}&show-fields=thumbnail&page-size=${pageSize}&order-by=${sortValue}&section=news`;
+	const url = `https://content.guardianapis.com/search?api-key=${api_key}&show-fields=thumbnail&page-size=${pageSize}&order-by=${sortValue}&section=news`;
 	const {success, payload} = yield call(api.getData, url);
 	if(success) {
 		yield all([
@@ -19,6 +19,7 @@ export function* getDefaultNews({ pageSize, sortValue, searchVal}) {
 		]);
 	}
 }
+
 
 export function* getArticleById({ apiUrl }) {
     const api_key = 'd26053c3-44aa-4498-a609-49701712ed54'

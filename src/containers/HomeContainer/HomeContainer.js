@@ -76,7 +76,7 @@ const HomeContainer = () => {
             <Container onClick={detectBodyClick}>
                 <GridBlock>
                     <ContainerHeaderBlock>
-                        {'Top Stories'}
+                        Top Stories
                     </ContainerHeaderBlock>
                     <SelectBlock>
                         <SelectComponent optionsList={sortDropdownValues} handleFilterRecords={handleFilterRecords}/>

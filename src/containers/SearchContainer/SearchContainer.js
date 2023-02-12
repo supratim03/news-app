@@ -36,7 +36,7 @@ const SearchContainer = () => {
                 className="search-card" 
                 onClick={(e) => handleArticleById(card.id, card.apiUrl)}
             >
-                <div className="no-image">
+                <div className="no-image" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
                     <div className={card.fields?.thumbnail == null ? "blank-img" : ""}></div>
                 </div>
                 <div className="card-desc">

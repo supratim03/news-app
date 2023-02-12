@@ -1,11 +1,10 @@
 import * as actionTypes from "../actionsTypes/types";
 
-export const getDefaultNews = (pageSize, sortValue, searchVal = 'news') => {
+export const getDefaultNews = (pageSize, sortValue) => {
     return {
         type: actionTypes.GET_DEFAULT_NEWS,
         pageSize,
-        sortValue,
-        searchVal
+        sortValue
     }
 }
 

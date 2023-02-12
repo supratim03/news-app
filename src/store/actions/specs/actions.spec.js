@@ -9,10 +9,9 @@ describe("user actions", () => {
         const expectedAction = {
             type: types.GET_DEFAULT_NEWS,
             pageSize,
-            sortValue,
-            searchVal
+            sortValue
         };
-        expect(actions.getDefaultNews(pageSize, sortValue, searchVal)).toEqual(expectedAction);
+        expect(actions.getDefaultNews(pageSize, sortValue)).toEqual(expectedAction);
     });
 
     it("should set default news", () => {

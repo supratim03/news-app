@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
 import ArticleDetailComponent from "../../components/ArticleDetailComponent/ArticleDetailComponent";
 import FooterComponent from "../../components/FooterComponent/FooterComponent";
 import HeaderComponent from "../../components/HeaderComponent/HeaderComponent";

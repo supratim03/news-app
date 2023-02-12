@@ -22,8 +22,7 @@ describe("Search Saga", () => {
         };
         const requestObject = {
             "pageSize": 10,
-            "sortValue": "newest",
-            "searchVal": "USA"
+            "sortValue": "newest"
         };
         api.getData.mockImplementation(() => dummyResponse);
         const dispatched = [];
@@ -130,8 +129,7 @@ describe("Search Saga", () => {
         };
         const requestObject = {
             "pageSize": 10,
-            "sortValue": "newest",
-            "searchVal": "USA"
+            "sortValue": "newest"
         };
         api.getData.mockImplementation(() => dummyResponse);
         const dispatched = [];
