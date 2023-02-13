@@ -7,7 +7,7 @@ import { ArticleBlock, ArticleBody, ArticleContainer, BodyBlock, Headline,
 } from "./ArticleDetailStyled";
 const ArticleDetailComponent = ({ articleDetail }) => {
 
-    const getTextBodies = articleDetail?.blocks && articleDetail?.blocks?.body.map((text, index) => {
+    const getTextBodies = articleDetail?.blocks && articleDetail?.blocks?.body.map((text) => {
         return (
             <div key={text.id}>
                 <p>{text.bodyTextSummary}</p>

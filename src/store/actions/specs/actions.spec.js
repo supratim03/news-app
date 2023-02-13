@@ -5,7 +5,6 @@ describe("user actions", () => {
     it("should get default news", () => {
         const pageSize = 10;
         const sortValue = "newest";
-        const searchVal = "test"
         const expectedAction = {
             type: types.GET_DEFAULT_NEWS,
             pageSize,

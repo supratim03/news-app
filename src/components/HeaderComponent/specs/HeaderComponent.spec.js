@@ -15,7 +15,6 @@ describe("Header component", () => {
     let wrapper;
 
     const onFocus = jest.fn();
-    const handleChange = jest.fn();
     beforeEach(() => {
         wrapper = mount(
             <MemoryRouter>

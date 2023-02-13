@@ -6,7 +6,7 @@ const SelectComponent = ({optionsList, handleFilterRecords}) => {
 
     const prepareOptions = optionsList.map(opt => {
         return (
-            <option value={opt.value}>
+            <option value={opt.value} key={opt.label}>
                 {opt.label}
             </option>
         )

@@ -11,7 +11,6 @@ import LoaderComponent from "../../components/LoaderComponent/LoaderComponent";
 import { sortDropdownValues } from "../../constants/constant";
 
 const HomeContainer = () => {
-    let mediaMatch = window.matchMedia('(max-width: 768px)');
     const dispatch = useDispatch();
     const navigate = useNavigate()
     const isLoading = useSelector(state => state.news.isLoading);
@@ -61,13 +60,13 @@ const HomeContainer = () => {
         )
     })
 
-    const prepareCatNewsBlock = newsList.length > 1 && newsList[1].value.map((card, index) => {
+    const prepareCatNewsBlock = newsList.length > 1 && newsList[1].value.map((card) => {
         return (
             <Card 
                 key={card.id}
                 style={card.fields?.thumbnail == null ? { backgroundColor: '#2455a1' } : { background: "url(" + card.fields?.thumbnail + ") no-repeat center center" }} 
                 className="search-card card-row-2" 
-                onClick={(e) => handleArticleById(card.id, card.apiUrl)}
+                onClick={() => handleArticleById(card.id, card.apiUrl)}
             >
                 <div className="no-image" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
                     <div className={card.fields?.thumbnail == null ? "blank-img" : ""}></div>
