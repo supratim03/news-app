@@ -1,8 +1,8 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import HomeContainer from "../containers/HomeContainer/HomeContainer";
-import SearchContainer from "../containers/SearchContainer/SearchContainer";
-import ViewArticle from "../containers/ViewArticle/ViewArticle";
+const HomeContainer = React.lazy(() => import("../containers/HomeContainer/HomeContainer"));
+const SearchContainer = React.lazy(() => import("../containers/SearchContainer/SearchContainer"));
+const ViewArticle = React.lazy(() => import("../containers/ViewArticle/ViewArticle"));
 
 const AppRoot = () => {
     return (
