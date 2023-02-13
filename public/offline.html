@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>You are offline</title>
+
+  <!-- Inline the page's stylesheet. -->
+  <style>
+    body {
+      font-family: helvetica, arial, sans-serif;
+      margin: 2em;
+    }
+
+    h1 {
+      font-style: italic;
+      color: #373fff;
+    }
+
+    p {
+      margin-block: 1rem;
+    }
+
+    button {
+      display: block;
+    }
+
+    .center-text {
+      text-align: center;
+    }
+
+    .center-btn {
+      display: flex;
+      justify-content: center
+    }
+
+    #reconnect-btn {
+      background-color: #4384f7 !important;
+      color: #ffffff;
+      padding: 17px 24px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer
+    }
+
+    .container {
+      margin-top: 15%;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="center-text">
+      <h1>You are currently offline</h1>
+    </div>
+
+    <div class="center-text">
+      <p id="timerText"></p>
+    </div>
+    <div class="center-btn">
+      <button id="reconnect-btn" onclick="handleReconenct()">Reconnect</Button>
+    </div>
+  </div>
+  <script>
+    var timerMaxValue = 5;
+    var x = setInterval(function () {
+
+      if(timerMaxValue >= 0){
+        document.getElementById("timerText").innerHTML = "We will try to reconenct you in " + timerMaxValue + " second";
+      }
+      
+      timerMaxValue = timerMaxValue - 1;
+     
+    }, 1000);
+
+    function handleReconenct() {
+      window.location.reload(true);
+    }
+
+    setTimeout(function () {
+      window.location.reload(1);
+    }, 5000);
+
+
+  </script>
+
+</body>
+
+</html>
