@@ -91,6 +91,7 @@ const HomeContainer = () => {
     }
 
     const handleFilterRecords = value => {
+        dispatch(setIsLoading(true))
         dispatch(getDefaultNews(10, value))
     }
     return (
@@ -112,10 +113,10 @@ const HomeContainer = () => {
                     {prepareTopNewsGrid}
                 </GridContainer> : <LoaderComponent />}
             </TopCardBlock>
-            {!isLoading && newsList.length > 1 && <CatHeaderBlock>
+            {!isLoading && <CatHeaderBlock>
                 <div>{newsList[1].key}</div>
             </CatHeaderBlock>}
-            {!isLoading && newsList.length > 1 && 
+            {!isLoading && 
             <CardBlock><GridContainer>
                     {prepareCatNewsBlock}
                 </GridContainer></CardBlock>}
