@@ -46,7 +46,6 @@ export const GridContainer = styled.div`
 
 export const CardBlock = styled.div`
     padding-bottom: 200px;
-    min-height: 100vh;
     margin-left: 100px;
     margin-right: 100px;
     @media (max-width: 768px) {
@@ -60,4 +59,27 @@ export const Card = styled.div`
     background-size: cover !important;
     position: relative;
     cursor: pointer;
+`;
+
+export const TopCardBlock = styled.div`
+    padding-bottom: 20px;
+    margin-left: 100px;
+    margin-right: 100px;
+    @media (max-width: 768px) {
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+`;
+
+export const CatHeaderBlock = styled.div`
+    padding-bottom: 20px;
+    margin-left: 100px;
+    margin-right: 100px;
+    font-size: 32px;
+    font-weight: bold;
+    @media (max-width: 768px) {
+        margin-left: 10px;
+        margin-right: 10px;
+        font-size: 16px
+    }
 `;

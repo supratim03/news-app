@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import HeaderComponent from "../../components/HeaderComponent/HeaderComponent";
@@ -9,17 +9,20 @@ import { Card, CardBlock, Container, ContainerHeaderBlock, GridBlock, GridContai
 import '../../styles/HomeContainer.css'
 import FooterComponent from "../../components/FooterComponent/FooterComponent";
 import { sortDropdownValues } from "../../constants/constant";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 const SearchContainer = () => {
     const { searchVal } = useParams();
     const navigate = useNavigate()
     const dispatch = useDispatch();
-    const searchResults = useSelector(state =>  state.news.searchResults);
-    const isLoading = useSelector(state => state.news.isLoading)
+    const searchResults = useSelector(state => state.news.searchResults);
+    const isLoading = useSelector(state => state.news.isLoading);
+    const [pageSize, setPageSize] = useState(15);
+    const [sortByValue, setSortByValue] = useState('newest')
 
     useEffect(() => {
         dispatch(setIsLoading(true))
-        dispatch(getSearchResults(searchVal, 10, 'newest'))
+        dispatch(getSearchResults(searchVal, pageSize, sortByValue))
     }, [])
 
     const handleArticleById = (id, url) => {
@@ -30,10 +33,10 @@ const SearchContainer = () => {
 
     const prepareSearchCards = searchResults.map(card => {
         return (
-            <Card 
+            <Card
                 key={card.id}
-                style={card.fields?.thumbnail == null ? { backgroundColor: '#2455a1' } : { backgroundImage: "url(" + card.fields?.thumbnail + ")" }} 
-                className="search-card" 
+                style={card.fields?.thumbnail == null ? { backgroundColor: '#2455a1' } : { background: "url(" + card.fields?.thumbnail + ") no-repeat center center" }}
+                className="search-card card-row-2"
                 onClick={(e) => handleArticleById(card.id, card.apiUrl)}
             >
                 <div className="no-image" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
@@ -51,9 +54,15 @@ const SearchContainer = () => {
     })
 
     const handleFilterRecords = value => {
-        dispatch(getSearchResults(searchVal, 10, value))
+        setSortByValue(value)
+        dispatch(getSearchResults(searchVal, 15, value))
     }
 
+    const fetchNextRecords = () => {
+        const page_size = pageSize + 15;
+        setPageSize(pageSize + 15);
+        dispatch(getSearchResults(searchVal, page_size, sortByValue));
+    }
     return (
         <>
             <HeaderComponent />
@@ -63,18 +72,28 @@ const SearchContainer = () => {
                         Search Results
                     </ContainerHeaderBlock>
                     <SelectBlock>
-                        <SelectComponent optionsList={sortDropdownValues} handleFilterRecords={handleFilterRecords}/>
+                        <SelectComponent optionsList={sortDropdownValues} handleFilterRecords={handleFilterRecords} />
                     </SelectBlock>
                 </GridBlock>
             </Container>
             <CardBlock>
-                {!isLoading ? <GridContainer>
-                    {prepareSearchCards}
-                </GridContainer> : <LoaderComponent />}
+                {!isLoading ?
+                    <InfiniteScroll
+                        dataLength={searchResults.length}
+                        next={fetchNextRecords}
+                        hasMore={true}
+                        loader={<h4 style={{ display: 'flex', justifyContent: 'center' }}><LoaderComponent /></h4>}
+                        style={{ overflowX: 'hidden' }}
+                    >
+                        <GridContainer>
+                            {prepareSearchCards}
+                        </GridContainer>
+                    </InfiniteScroll>
+                    : <LoaderComponent />}
             </CardBlock>
             {!isLoading && <FooterComponent />}
         </>
     )
 }
 
-export default SearchContainer;
+export default SearchContainer; 

@@ -78,7 +78,7 @@ export const Headline = styled.span`
 `;
 
 export const Thumbnail = styled.div`
-    background-image: url(${(props=> props.imgUrl)});
+    background: url(${(props=> props.imgUrl)}) no-repeat center center;
     height: 350px;
     width: auto;
     background-repeat: no-repeat;
@@ -92,6 +92,7 @@ export const Thumbnail = styled.div`
 export const TextBlock = styled.div`
     @media (max-width: 768px) {
         grid-column-start: 1;
-        grid-row-start: 2;
+        grid-row-start: 1;
+        grid-row: 2
     }
 `;

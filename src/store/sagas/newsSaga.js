@@ -8,10 +8,16 @@ export function* getDefaultNews({ pageSize, sortValue }) {
 	const url = `https://content.guardianapis.com/search?api-key=${api_key}&show-fields=thumbnail&page-size=${pageSize}&order-by=${sortValue}&section=news`;
 	const {success, payload} = yield call(api.getData, url);
 	if(success) {
-		yield all([
-			put(newsActions.setDefaultNews(payload.response.results)),
-			put(newsActions.setIsLoading(false))
-		]);
+		yield all(
+			[
+				put(newsActions.getArticlesByCategory('sport', payload.response.results, sortValue))
+			]
+		)
+		
+		// yield all([
+		// 	put(newsActions.setDefaultNews(payload.response.results)),
+		// 	put(newsActions.setIsLoading(false))
+		// ]);
 	} else {
 		yield all([
 			put(newsActions.setDefaultNews([])),
@@ -55,10 +61,41 @@ export function* getSearchResults({searchText, pageSize, sortValue }) {
 	}
 }
 
+export function* getArticlesByCategory({ category, data, sortBy }) {
+    const api_key = 'd26053c3-44aa-4498-a609-49701712ed54'
+	const url = `https://content.guardianapis.com/search?api-key=${api_key}&show-fields=thumbnail&page-size=3&order-by=${sortBy}&section=${category}`;
+	const {success, payload} = yield call(api.getData, url);
+	if(success) {
+		console.log(data);
+		console.log(payload.response.results);
+		const arr = [
+			{
+				key: "News",
+				value: data
+			},
+			{
+				key: `${category.charAt(0).toUpperCase()}${category.slice(1)}s`,
+				value: payload.response.results
+			}
+		]
+		console.log(arr)
+		yield all([
+			put(newsActions.setDefaultNews(arr)),
+			put(newsActions.setIsLoading(false))
+		]);
+	} else {
+		yield all([
+			put(newsActions.setDefaultNews([])),
+			put(newsActions.setIsLoading(false))
+		]);
+	}
+}
+
 function* newsSaga() {
 	yield takeEvery(actionTypes.GET_DEFAULT_NEWS, getDefaultNews);
     yield takeEvery(actionTypes.GET_ARTICLE_BY_ID, getArticleById);
 	yield takeEvery(actionTypes.GET_SEARCH_RESULTS, getSearchResults);
+	yield takeEvery(actionTypes.GET_ARTICLE_BY_CAT, getArticlesByCategory);
 }
 
 export default newsSaga;

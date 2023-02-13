@@ -3,7 +3,7 @@ import { takeEvery } from "redux-saga/effects";
 import * as api from "../../../api/apiHelper";
 import * as actions from "../../actions/actions";
 import * as types from "../../actionsTypes/types";
-import newsSaga, { getArticleById, getDefaultNews, getSearchResults } from "../newsSaga";
+import newsSaga, { getArticleById, getArticlesByCategory, getDefaultNews, getSearchResults } from "../newsSaga";
 
 describe("Search Saga", () => {
     api.getData = jest.fn();
@@ -32,8 +32,7 @@ describe("Search Saga", () => {
             },
             getDefaultNews, requestObject).toPromise();
         expect(dispatched).toEqual([
-            actions.setDefaultNews(dummyResponse.payload.response.results),
-            actions.setIsLoading(false)
+            actions.getArticlesByCategory('sport', dummyResponse.payload.response.results, 'newest')
         ]);
     });
 
@@ -88,6 +87,43 @@ describe("Search Saga", () => {
             actions.setIsLoading(false)
         ]);
     });
+
+    it("should call getDefaultNews and dispatch failed action", async () => {
+        const dummyResponse = {
+            "success": true,
+            "payload": {
+                "response": {
+                    "results": []
+                }
+            }
+        };
+        const requestObject = {
+            "category": "sport",
+            "data": [],
+            "sortBy": "newest"
+        };
+        api.getData.mockImplementation(() => dummyResponse);
+        const dispatched = [];
+        const arr = [
+			{
+				key: "News",
+				value: []
+			},
+			{
+				key: `${requestObject.category.charAt(0).toUpperCase()}${requestObject.category.slice(1)}s`,
+				value: dummyResponse.payload.response.results
+			}
+		]
+        await runSaga(
+            {
+                dispatch: (action) => dispatched.push(action)
+            },
+            getArticlesByCategory, requestObject).toPromise();
+        expect(dispatched).toEqual([
+            actions.setDefaultNews(arr),
+            actions.setIsLoading(false)
+        ]);
+    });
 })
 
 describe("newsSaga()", () => {
@@ -107,6 +143,12 @@ describe("newsSaga()", () => {
 
     it("Should fire on GET_SEARCH_RESULTS", () => {
         const expected = takeEvery(types.GET_SEARCH_RESULTS, actions.getSearchResults);
+        const actual = gen.next().value;
+        expect(JSON.stringify(actual)).toStrictEqual(JSON.stringify(expected));
+    });
+
+    it("Should fire on GET_ARTICLE_BY_CAT", () => {
+        const expected = takeEvery(types.GET_ARTICLE_BY_CAT, actions.getArticlesByCategory);
         const actual = gen.next().value;
         expect(JSON.stringify(actual)).toStrictEqual(JSON.stringify(expected));
     });
@@ -192,6 +234,33 @@ describe("Search Saga", () => {
             getSearchResults, requestObject).toPromise();
         expect(dispatched).toEqual([
             actions.setSearchResults([]),
+            actions.setIsLoading(false)
+        ]);
+    });
+
+    it("should call getDefaultNews and dispatch failed action", async () => {
+        const dummyResponse = {
+            "success": false,
+            "payload": {
+                "response": {
+                    "results": []
+                }
+            }
+        };
+        const requestObject = {
+            "category": "sports",
+            "data": [],
+            "sortBy": "newest"
+        };
+        api.getData.mockImplementation(() => dummyResponse);
+        const dispatched = [];
+        await runSaga(
+            {
+                dispatch: (action) => dispatched.push(action)
+            },
+            getArticlesByCategory, requestObject).toPromise();
+        expect(dispatched).toEqual([
+            actions.setDefaultNews([]),
             actions.setIsLoading(false)
         ]);
     });

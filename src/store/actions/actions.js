@@ -8,6 +8,15 @@ export const getDefaultNews = (pageSize, sortValue) => {
     }
 }
 
+export const getArticlesByCategory = (category, data, sortBy) => {
+    return {
+        type: actionTypes.GET_ARTICLE_BY_CAT,
+        category,
+        data,
+        sortBy
+    }
+}
+
 export const setDefaultNews = (newsList) => {
     return {
         type: actionTypes.SET_DEFAULT_NEWS,

@@ -1,7 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ArticleDetail component renders correctly 1`] = `ShallowWrapper {}`;
+exports[`ArticleDetail component renders correctly 1`] = `ReactWrapper {}`;
 
-exports[`ArticleDetail component with value renders correctly with data 1`] = `ShallowWrapper {}`;
-
-exports[`Shimemr component renders correctly 1`] = `ShallowWrapper {}`;
+exports[`ArticleDetail component with value renders correctly with data 1`] = `ReactWrapper {}`;

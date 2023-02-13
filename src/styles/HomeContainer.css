@@ -43,16 +43,12 @@
 }
 
 @media (max-width: 768px) {
-    .item-card0 {
-        grid-row: 1/3;
-    }
-
     .item-card2 {
         grid-row: auto
     }
 }
 
-.search-card {
+.bookmark-card {
     height: 300px;
     background-repeat: no-repeat;
     background-size: cover;

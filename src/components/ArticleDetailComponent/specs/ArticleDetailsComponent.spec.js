@@ -1,5 +1,5 @@
 import React from "react";
-import { shallow } from "enzyme";
+import { mount } from "enzyme";
 import ArticleDetailComponent from "../ArticleDetailComponent";
 import {articleDetail} from '../../../testData/testData'
 
@@ -7,7 +7,7 @@ describe("ArticleDetail component", () => {
     let wrapper;
 
     beforeEach(() => {
-        wrapper = shallow(
+        wrapper = mount(
             <ArticleDetailComponent 
                 articleDetail={null}
             />
@@ -23,7 +23,7 @@ describe("ArticleDetail component with value", () => {
     let wrapper;
 
     beforeEach(() => {
-        wrapper = shallow(
+        wrapper = mount(
             <ArticleDetailComponent 
                 articleDetail={articleDetail}
             />
