@@ -21,7 +21,16 @@ describe("Home container", () => {
 
     const initialState = {
         "news": {
-            "defaultNews": [],
+            "defaultNews": [
+                {
+                    key: "News",
+                    value: []
+                },
+                {
+                    key: 'Sports',
+                    value: []
+                }
+            ],
             "isLoading": true
         }
     };
@@ -114,6 +123,10 @@ describe("Home container with laoder", () => {
                             "pillarName": "News"
                         },
                     ]
+                },
+                {
+                    key: 'Sports',
+                    value: []
                 }
             ],
             
